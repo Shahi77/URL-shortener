@@ -1,7 +1,7 @@
 {
     "functions": {
         "api/index.js": {
-            "handler": "index.handler"
+            "handler": "index.js"
         }
     }
 }
