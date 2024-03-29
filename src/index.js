@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const urlRoute = require("./routes/url.routes");
+const staticRoute = require("./routes/staticRouter");
 const { connectToMongoDB } = require("./db/connect");
 const URL = require("./models/url");
 const app = express();
@@ -11,9 +12,12 @@ connectToMongoDB();
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/url", urlRoute);
+app.use("/", staticRoute);
 app.get("/url/:shortId", async (req, res) => {
   try {
     const shortId = req.params.shortId;
