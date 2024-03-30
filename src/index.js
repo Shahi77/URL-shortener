@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const urlRoute = require("./routes/url.routes");
+const userRoute = require("./routes/user.routes");
 const staticRoute = require("./routes/staticRouter");
 const { connectToMongoDB } = require("./db/connect");
 const URL = require("./models/url");
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/url", urlRoute);
 app.use("/", staticRoute);
+app.use("/user", userRoute);
 app.get("/url/:shortId", async (req, res) => {
   try {
     const shortId = req.params.shortId;
